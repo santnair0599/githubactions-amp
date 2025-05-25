@@ -1,0 +1,32 @@
+name: Deploy to EC2 on Push
+
+on:
+  push:
+    branches:
+      - main  # change to your branch
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/ec2_key.pem
+          chmod 400 ~/.ssh/ec2_key.pem
+
+      - name: Add EC2 host to known_hosts
+        run: ssh-keyscan -H 44.212.27.118 >> ~/.ssh/known_hosts
+
+      - name: Copy files to EC2 instance
+        run: |
+          scp -i ~/.ssh/ec2_key.pem -r ./ ubuntu@44.212.27.118:/home/ubuntu/github_code_base
+
+      - name: Run deploy script on EC2
+        run: |
+          ssh -i ~/.ssh/ec2_key.pem ubuntu@44.212.27.118 "cd /home/ubuntu/github_code_base && git pull origin main"
