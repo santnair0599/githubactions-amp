@@ -11,4 +11,4 @@ jobs:
           aws-secret-access-key: NZhqrBkc3npnywOByEZ4QUCrHXW/UFf3u7st+Vr0
           aws-region: us-east-1
       - name: Upload to s3
-        run: aws s3 cp hello.txt s3://githubactionsdemo-amp
+        run: aws s3 cp hello.TXT s3://githubactionsdemo-amp
