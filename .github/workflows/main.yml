@@ -9,8 +9,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: AKIAQJHM5VFTOWNGPSP6
-          aws-secret-access-key: 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
+          aws-access-key-id: xxx
+          aws-secret-access-key: xxx
           aws-region: us-east-1
       - name: List files (for debugging)
         run: ls -al
