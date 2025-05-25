@@ -15,4 +15,4 @@ jobs:
       - name: List files (for debugging)
         run: ls -al
       - name: Upload to s3
-        run: aws s3 cp hello.TXT s3://githubactionsdemo-amp
+        run: aws s3 cp hello.txt s3://githubactionsdemo-amp
